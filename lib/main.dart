@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:santidad/pages/home.dart';
+import 'package:santidad/pages/product.dart';
+import 'package:santidad/services/databaseHelper.dart';
 
 Future<void> main() async {
   const bool isProduction = bool.fromEnvironment('dart.vm.product');
@@ -17,9 +19,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Santidad Divina',
-      home: Home(),
+      // home: Home(),
+      routes: {
+        '/': (context) => Home(),
+        '/products': (context) => Product(),
+      },
+      initialRoute: '/',
     );
   }
 }
