@@ -47,6 +47,7 @@ class DatabaseHelper{
         await dbClient.delete('carousels');
         for (var carousel in carousels) {
             String? localPath = await downloadImage(carousel['image']);
+            print(localPath);
             await dbClient.insert('carousels', {
                 'id': carousel['id'],
                 'title': carousel['image'],
@@ -56,14 +57,16 @@ class DatabaseHelper{
 
         return await dbClient.query('carousels');
     }
-    Future<String?> downloadImage(String url) async {
+    Future<String?> downloadImage(String urlImage) async {
         try {
-            var res = await http.get(Uri.parse(url));
+            // print('$url/../images/$urlImage');
+            // print(urlImage);
+            var res = await http.get(Uri.parse('$url/../images/$urlImage'));
             if (res.statusCode == 200) {
                 final directory = await getApplicationDocumentsDirectory();
                 String imagePath = '${directory.path}/carousels';
                 await Directory(imagePath).create(recursive: true);
-                File file = File('$imagePath/${url.split('/').last}');
+                File file = File('$imagePath/${urlImage.split('/').last}');
                 await file.writeAsBytes(res.bodyBytes);
                 return file.path;
             }else{
