@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:santidad/pages/home.dart';
 
 Future<void> main() async {
   const bool isProduction = bool.fromEnvironment('dart.vm.product');
@@ -16,9 +17,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Santidad Divina',
-      home: const Home(),
+      home: Home(),
     );
   }
 }
